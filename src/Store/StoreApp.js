@@ -15,7 +15,10 @@ const center = {
   lat: 37.33,
   lng: -121.893,
 };
-
+const options = {
+  disableDefaultUI: true,
+  zoomControl: true,
+}
 export default function StoreApp() {
   const {isLoaded, loadError} = useLoadScript({
    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -26,10 +29,12 @@ export default function StoreApp() {
   if(!isLoaded) return "Loading maps";
 
   return <div>
+    <h1>Refood </h1>
     <GoogleMap 
       mapContainerStyle = {mapContainerStyle}
       zoom = {10}
-      center = {center}>
+      center = {center}
+      options = {options}>
     </GoogleMap>
   </div>
 }
