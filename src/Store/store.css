@@ -1,3 +1,69 @@
 h1 {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+  color: #fff;
+}
+
+h2, p, label {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff;
+}
+
+body {
+  margin:0;
+  padding:0;
+  font-family: sans-serif;
+  background: linear-gradient(#50b1c0, #6bd19e);
+}
+
+.create-event {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  width: 600px;
+  padding: 40px;
+  margin-top: 50px;
+  margin-bottom: 100px;
+  transform: translate(-50%, 0%);
+  background: rgba(5, 138, 71, 0.5);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px rgba(133, 192, 177, 0.6);
+  border-radius: 10px;
+}
+
+.create-event h2 {
+  margin: 0 0 30px;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+}
+
+.create-event .field {
+  position: relative;
+}
+
+.create-event .field input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+}
+.create-event .field label {
+  position: absolute;
+  top: -20px;
+  left: 0;
+  color: #ffffff;
+  font-size: 14px;
+  pointer-events: none;
+  transition: .2s;
+}
+
+.create-event .user-box input:focus ~ label,
+.create-event .field input:valid ~ label {
+  
 }

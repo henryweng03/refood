@@ -11,7 +11,7 @@ import {
 
 const libraries = ["places"];
 const mapContainerStyle = {
-  width: "500px",
+  width: "100%",
   height: "400px",
 };
 const center = {
@@ -53,7 +53,7 @@ export default function StoreApp() {
   if(!isLoaded) return "Loading maps";
 
   return <div>
-    <h1>Refood🥬</h1>
+    <h1>Refood</h1>
     <GoogleMap 
       mapContainerStyle = {mapContainerStyle}
       zoom = {5}
@@ -104,20 +104,35 @@ export default function StoreApp() {
 
     </GoogleMap>
     <p></p>
-    <form onSubmit = {handleSubmit(onSubmit)} id = "add-marker-form">
-      <label htmlFor = "lat">Latitude:</label><br/>
-      <input type = "number" step = "any" {...register("lat")} /><br/><br/>
-      <label htmlFor = "lng">Longitude:</label><br/>
-      <input type = "number" step = "any" {...register("lng")} /><br/><br/>
-      <label htmlFor = "name">Event name:</label><br/>
-      <input type = "text"  {...register("name")} /><br/><br/>
-      <label htmlFor = "name">Event start:</label><br/>
-      <input type="datetime-local" {...register("startDate")} /><br/><br/>
-      <label htmlFor = "name">Event end:</label><br/>
-      <input type="datetime-local" {...register("endDate")} /><br/><br/>
-      <label htmlFor = "description">Event Description:</label><br/>
-      <textarea rows = "4" cols = "50" {...register("description")} /><br/><br/>
-      <input type = "submit" />
+    <div class = "create-event">
+      <h2>Create New Event</h2>
+      <form onSubmit = {handleSubmit(onSubmit)} id = "add-marker-form">
+        <div class = "field">
+         <input type = "number" step = "any" required {...register("lat")} /><br/><br/>
+         <label>Latitude</label>
+        </div>
+        <div class = "field">
+         <input type = "number" step = "any" required {...register("lng")} /><br/><br/>
+         <label>Longitude</label>
+        </div>
+        <div class = "field">
+         <input type = "text" required {...register("name")} /><br/><br/>
+         <label>Event name</label>
+        </div>
+        <div class = "field">
+         <input type = "datetime-local" required {...register("startDate")} /><br/><br/>
+         <label>Event start</label>
+        </div>
+        <div class = "field">
+         <input type = "datetime-local" required {...register("endDate")} /><br/><br/>
+         <label>Event end</label>
+        </div>
+        <div class = "field">
+          <input type = "text" required {...register("description")} /><br/><br/>
+         <label>Event description</label>
+        </div>
+        <input type = "submit" />
     </form>
+    </div>
   </div>
 }
