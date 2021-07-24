@@ -69,7 +69,7 @@ export default function StoreApp() {
             key = {marker.time.toISOString()}
             position = {{lat: parseFloat(marker.data.lat), lng: parseFloat(marker.data.lng)}}
             icon = {{
-              url: '../event.png',
+              url: '../grocery.png',
               scaledSize: new window.google.maps.Size(45,45),
               origin: new window.google.maps.Point(0,0),
               anchor: new window.google.maps.Point(22.5,22.5)
@@ -106,7 +106,7 @@ export default function StoreApp() {
 
       </GoogleMap>
     </div>
-    <p></p>
+    <br /><br />
     <div class = "create-event">
       <h2 class = "form-header">Create New Event</h2>
       <form onSubmit = {handleSubmit(onSubmit)} id = "add-marker-form">
@@ -131,10 +131,10 @@ export default function StoreApp() {
          <label>Event end</label>
         </div>
         <div class = "field">
-          <input type = "text" required {...register("description")} /><br/><br/>
+          <input type = "text" required {...register("description")} /><br/>
          <label>Event description</label>
         </div>
-        <input type = "submit" />
+         <input type = "submit" />
     </form>
     </div>
   </div>
