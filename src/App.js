@@ -3,16 +3,20 @@ import StoreApp from './Store/StoreApp';
 import LandingPage from "./LandingPage/LandingPage";
 import './index.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Individual from './Individual/Individual';
 
 function App() {
   return (
     <Router>
       <div>
         <Switch>
-          <Route exact path = "/">
+          <Route exact path = "/store-view">
             <StoreApp />
           </Route>
-          <Route exact path = "/lp">
+          <Route exact path = "/i-view">
+            <Individual />
+          </Route>
+          <Route exact path = "/">
             <LandingPage />
           </Route>
         </Switch>
