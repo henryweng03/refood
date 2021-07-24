@@ -54,58 +54,61 @@ export default function StoreApp() {
 
   return <div>
     <h1>Refood</h1>
-    <GoogleMap 
-      mapContainerStyle = {mapContainerStyle}
-      zoom = {5}
-      center = {center}
-      options = {options}
-      onLoad = {onMapLoad}
-    >
-      {/* renders markers on the map */}
-      {markers.map((marker) => (
-        <Marker
-          key = {marker.time.toISOString()}
-          position = {{lat: parseFloat(marker.data.lat), lng: parseFloat(marker.data.lng)}}
-          icon = {{
-            url: '../event.png',
-            scaledSize: new window.google.maps.Size(45,45),
-            origin: new window.google.maps.Point(0,0),
-            anchor: new window.google.maps.Point(22.5,22.5)
-          }}
-          onClick = {() => {
-            setSelectedMarker(marker);
-          }}
-        />
-      ))}
-
-      {selectedMarker ? (
-          <InfoWindow
-            position={{ lat: parseFloat(selectedMarker.data.lat), lng: parseFloat(selectedMarker.data.lng) }}
-            onCloseClick={() => {
-              setSelectedMarker(null);
+    <div class = "map">
+      <h2 class = "map-header">Event Map</h2>
+      <GoogleMap 
+        mapContainerStyle = {mapContainerStyle}
+        zoom = {12}
+        center = {center}
+        options = {options}
+        onLoad = {onMapLoad}
+      >
+        {/* renders markers on the map */}
+        {markers.map((marker) => (
+          <Marker
+            key = {marker.time.toISOString()}
+            position = {{lat: parseFloat(marker.data.lat), lng: parseFloat(marker.data.lng)}}
+            icon = {{
+              url: '../event.png',
+              scaledSize: new window.google.maps.Size(45,45),
+              origin: new window.google.maps.Point(0,0),
+              anchor: new window.google.maps.Point(22.5,22.5)
             }}
-          >
-            <div>
-              <h2>
-                {selectedMarker.data.name} 🥬
-              </h2>
-              <p>
-                {selectedMarker.data.description}
-              </p>
-              <p>
-                Event start: {selectedMarker.data.startDate}
-              </p>
-              <p>
-                Event end: {selectedMarker.data.endDate}
-              </p>
-            </div>
-          </InfoWindow>
-        ) : null}
+            onClick = {() => {
+              setSelectedMarker(marker);
+            }}
+          />
+        ))}
 
-    </GoogleMap>
+        {selectedMarker ? (
+            <InfoWindow
+              position={{ lat: parseFloat(selectedMarker.data.lat), lng: parseFloat(selectedMarker.data.lng) }}
+              onCloseClick={() => {
+                setSelectedMarker(null);
+              }}
+            >
+              <div>
+                <h2>
+                  {selectedMarker.data.name} 🥬
+                </h2>
+                <p>
+                  {selectedMarker.data.description}
+                </p>
+                <p>
+                  Event start: {selectedMarker.data.startDate}
+                </p>
+                <p>
+                  Event end: {selectedMarker.data.endDate}
+                </p>
+              </div>
+            </InfoWindow>
+          ) : null}
+
+      </GoogleMap>
+    </div>
     <p></p>
     <div class = "create-event">
-      <h2>Create New Event</h2>
+      <h2 class = "form-header">Create New Event</h2>
       <form onSubmit = {handleSubmit(onSubmit)} id = "add-marker-form">
         <div class = "field">
          <input type = "number" step = "any" required {...register("lat")} /><br/><br/>
