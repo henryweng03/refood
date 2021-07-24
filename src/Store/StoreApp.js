@@ -1,5 +1,4 @@
 import React from "react";
-import './store.css';
 import { useForm } from "react-hook-form";
 import {
   GoogleMap,
@@ -53,9 +52,9 @@ export default function StoreApp() {
   if(!isLoaded) return "Loading maps";
 
   return <div>
-    <h1>Refood</h1>
+    <h1>Refood Store Interface</h1><br />
     <div class = "map">
-      <h2 class = "map-header">Event Map</h2>
+      <h2 class = "map-header">Food Event Map</h2>
       <GoogleMap 
         mapContainerStyle = {mapContainerStyle}
         zoom = {12}
@@ -69,7 +68,7 @@ export default function StoreApp() {
             key = {marker.time.toISOString()}
             position = {{lat: parseFloat(marker.data.lat), lng: parseFloat(marker.data.lng)}}
             icon = {{
-              url: '../grocery.png',
+              url: '../refood_icon.png',
               scaledSize: new window.google.maps.Size(45,45),
               origin: new window.google.maps.Point(0,0),
               anchor: new window.google.maps.Point(22.5,22.5)
@@ -89,7 +88,7 @@ export default function StoreApp() {
             >
               <div>
                 <h2>
-                  {selectedMarker.data.name} 🥬
+                  {selectedMarker.data.name}
                 </h2>
                 <p>
                   {selectedMarker.data.description}
