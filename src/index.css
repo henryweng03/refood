@@ -1,4 +1,4 @@
-h1 {
+  h1 {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align: center;
     font-size: 40px;
@@ -95,7 +95,6 @@ h1 {
     color: #ffffff;
     font-size: 14px;
     pointer-events: none;
-    transition: .2s;
   }
   
   input[type=submit] {
@@ -120,3 +119,54 @@ h1 {
     transition: 0.5s;
   }
   
+  .landing-button {
+    animation: fadeIn ease 1.5s;
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    padding: 15px;
+    width: 250px;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 15px;
+  }
+  
+  .landing-button:hover {
+    top: 50%;
+    background: #14915d;
+    border: 1px solid #14915d;
+    border-radius: 5px;
+    color: #ffffff;
+    box-shadow: 0 0 25px rgba(27, 117, 95, 0.6);
+    margin: 15px;
+    transition: 0.5s;
+  }
+
+
+  #container{
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .lp-logo {
+    animation: fadeIn ease 1.5s;
+    width: 40vh;
+  }
+
+  @keyframes fadeIn{
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+  }
