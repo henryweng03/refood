@@ -6,6 +6,11 @@ import {
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
 
 const libraries = ["places"];
@@ -30,6 +35,15 @@ export default function Individual() {
 
   const [markers, setMarkers] = React.useState([]);
   const [selectedMarker, setSelectedMarker] = React.useState(null);
+  const [open, setOpen] = React.useState(false);
+
+  const handleSignUpOpen = () =>{
+      setOpen(true);
+  }
+
+  const handleSignUpClose = () =>{
+    setOpen(false);
+}
 
   const { register, handleSubmit } = useForm();
   const onButtonClick = () => {
@@ -61,6 +75,7 @@ export default function Individual() {
         center = {center}
         options = {options}
         onLoad = {onMapLoad}
+        onClick = {()=>setSelectedMarker(null)}
       >
         {/* renders markers on the map */}
         {markers.map((marker) => (
@@ -94,7 +109,45 @@ export default function Individual() {
                 <p>
                   Test Description
                 </p>
-                <button className = 'signup-button' onClick = {onButtonClick} >Sign Up</button>
+                <button className = 'signup-button' onClick = {handleSignUpOpen} >Sign Up</button>
+                <Dialog
+                  open = {open}
+                  onClose = {handleSignUpClose}
+                  PaperProps={{
+                    style: { borderRadius: 20, width: "55vh"}
+                  }}>
+                      <div class = "sign-form">
+                        <h2>Event Sign Up</h2>
+                        <br />
+                        <form id = "add-marker-form">
+                          <div class = "field">
+                            <input type = "number" step = "any" required {...register("lat")} /><br/><br/>
+                            <label>Latitude</label>
+                          </div>
+                          <div class = "field">
+                            <input type = "number" step = "any" required {...register("lng")} /><br/><br/>
+                            <label>Longitude</label>
+                          </div>
+                          <div class = "field">
+                            <input type = "text" required {...register("name")} /><br/><br/>
+                            <label>Event name</label>
+                          </div>
+                          <div class = "field">
+                            <input type = "datetime-local" required {...register("startDate")} /><br/><br/>
+                            <label>Event start</label>
+                          </div>
+                          <div class = "field">
+                            <input type = "datetime-local" required {...register("endDate")} /><br/><br/>
+                            <label>Event end</label>
+                          </div>
+                          <div class = "field">
+                            <input type = "text" required {...register("description")} /><br/>
+                            <label>Event description</label>
+                          </div>
+                            <input type = "submit" />
+                        </form>
+                      </div>
+                </Dialog>
               </div>
             </InfoWindow>
           ) : null}

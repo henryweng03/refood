@@ -61,6 +61,7 @@ export default function StoreApp() {
         center = {center}
         options = {options}
         onLoad = {onMapLoad}
+        onClick = {()=>setSelectedMarker(null)}
       >
         {/* renders markers on the map */}
         {markers.map((marker) => (
