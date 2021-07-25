@@ -7,10 +7,7 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
+
 
 
 const libraries = ["places"];
@@ -93,7 +90,6 @@ export default function Individual() {
             }}
           />
         ))}
-        
 
         {selectedMarker ? (
             <InfoWindow
@@ -121,28 +117,16 @@ export default function Individual() {
                         <br />
                         <form id = "add-marker-form">
                           <div class = "field">
-                            <input type = "number" step = "any" required {...register("lat")} /><br/><br/>
-                            <label>Latitude</label>
+                            <input type = "text" required {...register("fname")} /><br/><br/>
+                            <label>First Name</label>
                           </div>
                           <div class = "field">
-                            <input type = "number" step = "any" required {...register("lng")} /><br/><br/>
-                            <label>Longitude</label>
+                            <input type = "text" required {...register("lname")} /><br/><br/>
+                            <label>Last Name</label>
                           </div>
                           <div class = "field">
-                            <input type = "text" required {...register("name")} /><br/><br/>
-                            <label>Event name</label>
-                          </div>
-                          <div class = "field">
-                            <input type = "datetime-local" required {...register("startDate")} /><br/><br/>
-                            <label>Event start</label>
-                          </div>
-                          <div class = "field">
-                            <input type = "datetime-local" required {...register("endDate")} /><br/><br/>
-                            <label>Event end</label>
-                          </div>
-                          <div class = "field">
-                            <input type = "text" required {...register("description")} /><br/>
-                            <label>Event description</label>
+                            <input type = "email" required {...register("lname")} /><br/><br/>
+                            <label>Email</label>
                           </div>
                             <input type = "submit" />
                         </form>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import {
   GoogleMap,
@@ -6,7 +6,8 @@ import {
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
-
+import firebase from "../firebase"
+import { reflect } from "async";
 
 const libraries = ["places"];
 const mapContainerStyle = {
@@ -30,6 +31,26 @@ export default function StoreApp() {
 
   const [markers, setMarkers] = React.useState([]);
   const [selectedMarker, setSelectedMarker] = React.useState(null);
+  const [signUps, setSignUps] = React.useState([]);
+
+  const signUpRef = firebase.firestore().collection("/signups");
+
+  function getSignUps(){
+    signUpRef.onSnapshot((querySnapshot) => {
+      console.log("bruh")
+      const items = [];
+      querySnapshot.forEach((doc) => {
+        items.push(doc.data());
+      });
+      setSignUps(items);
+    })
+  }
+
+  useEffect(() => {
+    getSignUps();
+  })
+
+  console.log(signUps)
 
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
@@ -108,7 +129,7 @@ export default function StoreApp() {
     </div>
     <br /><br />
     <div class = "create-event">
-      <h2 class = "form-header">Create New Event</h2>
+      <h2 class = "form-header">Create New Event</h2><br />
       <form onSubmit = {handleSubmit(onSubmit)} id = "add-marker-form">
         <div class = "field">
          <input type = "number" step = "any" required {...register("lat")} /><br/><br/>
@@ -136,6 +157,25 @@ export default function StoreApp() {
         </div>
          <input type = "submit" />
     </form>
+    </div>
+    <h1>Sign Ups</h1>
+    <div id = "table-container">
+      <table>
+        <thead>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+        </thead>
+        <tbody>
+          {signUps.map((signup) => (
+            <tr>
+              <td>{signup.fname}</td>
+              <td>{signup.lname}</td>
+              <td>{signup.email}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   </div>
 }

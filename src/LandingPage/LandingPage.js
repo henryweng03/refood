@@ -12,7 +12,7 @@ export default function StoreApp() {
         <button className = 'landing-button'>Sign in as Store</button>
       </Link>
       <Link to = "/i-view">
-        <button className = 'landing-button'>Sign in as Individual</button>
+        <button className = 'landing-button'>View Upcoming Events</button>
       </Link>
     </div>
   }
