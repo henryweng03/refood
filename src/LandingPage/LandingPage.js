@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 export default function StoreApp() {
-  const { register, handleSubmit } = useForm();
 
   return <div id = "container">
       <img class = 'lp-logo' src="refood_transparent.png" alt="Refood Logo" />

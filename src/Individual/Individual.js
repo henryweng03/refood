@@ -7,7 +7,7 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import Dialog from "@material-ui/core/Dialog";
-
+import firebase from "../firebase"
 
 
 const libraries = ["places"];
@@ -33,6 +33,17 @@ export default function Individual() {
   const [markers, setMarkers] = React.useState([]);
   const [selectedMarker, setSelectedMarker] = React.useState(null);
   const [open, setOpen] = React.useState(false);
+  
+  const signUpRef = firebase.firestore().collection("/signups");
+
+  function addSignUp(newSignUp){
+    signUpRef
+    .doc()
+    .set(newSignUp)
+    .catch((err) => {
+      console.error(err);
+    })
+  }
 
   const handleSignUpOpen = () =>{
       setOpen(true);
@@ -115,7 +126,10 @@ export default function Individual() {
                       <div class = "sign-form">
                         <h2>Event Sign Up</h2>
                         <br />
-                        <form id = "add-marker-form">
+                        <form id = "signup-form" onSubmit = {handleSubmit((data) =>{
+                          addSignUp(data);
+                          document.getElementById("signup-form").reset();
+                        })}>
                           <div class = "field">
                             <input type = "text" required {...register("fname")} /><br/><br/>
                             <label>First Name</label>
@@ -125,7 +139,7 @@ export default function Individual() {
                             <label>Last Name</label>
                           </div>
                           <div class = "field">
-                            <input type = "email" required {...register("lname")} /><br/><br/>
+                            <input type = "email" required {...register("email")} /><br/><br/>
                             <label>Email</label>
                           </div>
                             <input type = "submit" />
