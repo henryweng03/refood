@@ -12,10 +12,10 @@ export default function StoreApp() {
     <div id = "container">
       <img class = 'lp-logo' src="refood_transparent.png" alt="Refood Logo" />
       <Link to = "/view-events">
-        <button className = 'landing-button'>View Upcoming Events</button>
+        <button className = 'landing-button'>Sign up for Events</button>
       </Link>
       <Link to = "/store-view">
-        <button className = 'landing-button'>Log in as Store</button>
+        <button className = 'landing-button'>Log in as Grocery Store</button>
       </Link>
     </div>
   </div>
