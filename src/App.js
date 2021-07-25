@@ -1,18 +1,19 @@
-import React from 'react';
-import StoreApp from './Store/StoreApp';
+import React from "react";
+import StoreApp from "./business/StoreApp";
 import LandingPage from "./LandingPage/LandingPage";
-import './index.css';
+import "./index.css";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import firebase from "firebase";
 
 function App() {
   return (
     <Router>
       <div>
         <Switch>
-          <Route exact path = "/">
+          <Route exact path="/">
             <StoreApp />
           </Route>
-          <Route exact path = "/lp">
+          <Route exact path="/lp">
             <LandingPage />
           </Route>
         </Switch>
@@ -20,5 +21,13 @@ function App() {
     </Router>
   );
 }
+
+// function App() {
+//   return (
+//     <Router>
+//       <Navbar/>
+//     </Router>
+//   );
+// }
 
 export default App;
