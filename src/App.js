@@ -13,7 +13,7 @@ function App() {
           <Route exact path = "/store-view">
             <StoreApp />
           </Route>
-          <Route exact path = "/i-view">
+          <Route exact path = "/view-events">
             <Individual />
           </Route>
           <Route exact path = "/">

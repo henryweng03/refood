@@ -66,12 +66,12 @@ export default function Individual() {
   }, []);
 
   const handleSignUpOpen = () =>{
-      setOpen(true);
+    setOpen(true);
   }
 
   const handleSignUpClose = () =>{
     setOpen(false);
-}
+  }
 
   const { register, handleSubmit } = useForm();
 
