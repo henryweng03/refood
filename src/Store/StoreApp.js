@@ -197,3 +197,4 @@ export default function StoreApp() {
     </div>
   </div>
 }
+

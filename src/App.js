@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Individual from './Individual/Individual';
 
 function App() {
+  
   return (
     <Router>
       <div>
