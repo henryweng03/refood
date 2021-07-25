@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import {
   GoogleMap,
@@ -24,6 +24,8 @@ const options = {
   zoomControl: true,
 }
 
+
+
 export default function Individual() {
   const {isLoaded, loadError} = useLoadScript({
    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -45,6 +47,23 @@ export default function Individual() {
     })
   }
 
+  useEffect(() => {
+    const ref = firebase.database().ref("/EventInfo");
+    let eventInfo = [];
+    ref.on("value", (response) => {
+      const data = response.val();
+      for (let id in data) {
+        eventInfo.push({
+          data: data[id].data,
+          time: data[id].time,
+        });
+      }
+      for (let i in eventInfo) {
+        setMarkers(eventInfo);
+      }
+    });
+  }, []);
+
   const handleSignUpOpen = () =>{
       setOpen(true);
   }
@@ -54,16 +73,6 @@ export default function Individual() {
 }
 
   const { register, handleSubmit } = useForm();
-  const onButtonClick = () => {
-    setMarkers((current) => [
-      ...current,
-      {
-        lat: 37.4,
-        lng: -121.9,
-        time: new Date(),
-      }
-    ])
-  }
 
   const mapRef = React.useRef();
   const onMapLoad = React.useCallback((map) => {
@@ -88,8 +97,8 @@ export default function Individual() {
         {/* renders markers on the map */}
         {markers.map((marker) => (
           <Marker
-            key = {marker.time.toISOString()}
-            position = {{lat: parseFloat(marker.lat), lng: parseFloat(marker.lng)}}
+            key = {marker.time}
+            position = {{lat: parseFloat(marker.data.lat), lng: parseFloat(marker.data.lng)}}
             icon = {{
               url: '../refood_icon.png',
               scaledSize: new window.google.maps.Size(45,45),
@@ -104,17 +113,23 @@ export default function Individual() {
 
         {selectedMarker ? (
             <InfoWindow
-              position={{ lat: parseFloat(selectedMarker.lat), lng: parseFloat(selectedMarker.lng) }}
+              position={{ lat: parseFloat(selectedMarker.data.lat), lng: parseFloat(selectedMarker.data.lng) }}
               onCloseClick={() => {
                 setSelectedMarker(null);
               }}
             >
               <div>
-                <h2>
-                  Test Title
+              <h2>
+                  {selectedMarker.data.name}
                 </h2>
                 <p>
-                  Test Description
+                  {selectedMarker.data.description}
+                </p>
+                <p>
+                  Event start: {selectedMarker.data.startDate}
+                </p>
+                <p>
+                  Event end: {selectedMarker.data.endDate}
                 </p>
                 <button className = 'signup-button' onClick = {handleSignUpOpen} >Sign Up</button>
                 <Dialog
@@ -152,7 +167,5 @@ export default function Individual() {
 
       </GoogleMap>
     </div>
-    <button className = 'landing-button' onClick = {onButtonClick} >Add Marker</button>
-    <br /><br />
   </div>
 }

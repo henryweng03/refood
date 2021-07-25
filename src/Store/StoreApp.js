@@ -37,7 +37,6 @@ export default function StoreApp() {
 
   function getSignUps(){
     signUpRef.onSnapshot((querySnapshot) => {
-      console.log("bruh")
       const items = [];
       querySnapshot.forEach((doc) => {
         items.push(doc.data());
@@ -47,20 +46,30 @@ export default function StoreApp() {
   }
 
   useEffect(() => {
+    const ref = firebase.database().ref("/EventInfo");
+    let eventInfo = [];
+    ref.on("value", (response) => {
+      const data = response.val();
+      for (let id in data) {
+        eventInfo.push({
+          data: data[id].data,
+          time: data[id].time,
+        });
+      }
+      setMarkers(eventInfo);
+    });
     getSignUps();
-  })
+  }, []);
 
-  console.log(signUps)
 
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
+    const firestore = firebase.database().ref("/EventInfo");
+    firestore.push({ data, time: new Date().toString() });
     setMarkers((current) => [
       ...current,
-      {
-        data,
-        time: new Date(),
-      }
-    ])
+      { data, time: new Date().toString() },
+    ]);
     document.getElementById("add-marker-form").reset();
   }
 
@@ -87,7 +96,7 @@ export default function StoreApp() {
         {/* renders markers on the map */}
         {markers.map((marker) => (
           <Marker
-            key = {marker.time.toISOString()}
+            key = {marker.time}
             position = {{lat: parseFloat(marker.data.lat), lng: parseFloat(marker.data.lng)}}
             icon = {{
               url: '../refood_icon.png',
